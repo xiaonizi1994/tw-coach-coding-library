@@ -30,4 +30,17 @@ public class CalculatorTest {
         // 3. 断言
         assertThat(result, is(14.0));
     }
+
+    /**
+     * 统计列表中偶数的和
+     * Input: Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+     * Output: 30
+     */
+    @Test
+    public void should_sum_evens() {
+        Calculator calculator = new Calculator();
+        int result = calculator.sumEvens(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertThat(result, is(30));
+    }
+
 }
