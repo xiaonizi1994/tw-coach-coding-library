@@ -43,4 +43,20 @@ public class CalculatorTest {
         assertThat(result, is(30));
     }
 
+
+    /**
+     * 按照名字拼音顺序统计名字的长度，输入为名字列表，输出为名字-长度映射
+     * Input: Arrays.asList("ynpan", "yzqi", "ybowang", "qiqzhao", "yibtan", "abc", "sjyuan")
+     * Output: Map<String, Integer>: {"abc": 3, qiqzhao": 7, "sjyuan": 6, "ybowang": 7, yibtan: 6, ynpan: 5, yzqi: 4 }
+     */
+    @Test
+    public void should_sort_and_count_names() {
+        Calculator calculator = new Calculator();
+
+        Map<String, Integer> result = calculator.sortAndCount(Arrays.asList("ynpan", "yzqi", "ybowang", "qiqzhao",
+                "yibtan", "abc", "sjyuan"));
+        assertThat(result.keySet(), contains("abc", "qiqzhao", "sjyuan", "ybowang", "yibtan", "ynpan", "yzqi"));
+        assertThat(result.values(), contains(3, 7, 6, 7, 6, 5, 4));
+    }
+
 }

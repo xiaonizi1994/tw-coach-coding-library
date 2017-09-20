@@ -15,4 +15,11 @@ public class Calculator {
                 .filter(number -> number % 2 == 0)
                 .mapToInt(Integer::intValue).sum();
     }
+
+    public Map<String, Integer> sortAndCount(List<String> strings) {
+        Collections.sort(strings);
+        Map<String, Integer> result = new LinkedHashMap<>();
+        strings.forEach(item -> result.put(item, item.length()));
+        return result;
+    }
 }
