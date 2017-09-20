@@ -59,4 +59,10 @@ public class CalculatorTest {
         assertThat(result.values(), contains(3, 7, 6, 7, 6, 5, 4));
     }
 
+    @Test
+    public void should_order_random() {
+        List<Integer> randomNumbers = new Calculator().generateRandomNumbers(5);
+        assertThat(randomNumbers, containsInAnyOrder(1, 2, 3, 4, 5));
+        Logger.getLogger(this.getClass().getName()).info(randomNumbers.toString());
+    }
 }
