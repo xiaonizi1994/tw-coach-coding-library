@@ -42,7 +42,7 @@ class AuthenticationControllerTest extends BaseControllerTest {
                 .content(new ObjectMapper().writeValueAsString(loginRequestBody)))
                 .andExpect(status().isUnauthorized())
                 .andDo(print())
-                .andExpect(jsonPath("$").value("Invalid username or password."));
+                .andExpect(jsonPath("$").value("Invalid password."));
     }
 
 }

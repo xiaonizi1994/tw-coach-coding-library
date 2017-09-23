@@ -12,7 +12,7 @@ public class UserCache {
     private static final Map<String, User> ID_USERS = new HashMap<>();
 
     static {
-        User user = User.builder().id(StringUtils.randomUUID()).username("future_star").password("123455").age(22).build();
+        User user = User.builder().id(StringUtils.randomUUID()).username("future_star").password("123456").age(22).build();
         NAME_USERS.put(user.getUsername(), user);
         ID_USERS.put(user.getId(), user);
     }

@@ -13,11 +13,13 @@ import java.sql.SQLException;
 @Slf4j
 @RestControllerAdvice
 public class ControllerExceptionAdvice {
-    
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler({SQLException.class, InvalidCredentialException.class})
     public String handleSQLException(InvalidCredentialException exception) {
         return exception.getMessage();
     }
-    
+
+
+
 }
