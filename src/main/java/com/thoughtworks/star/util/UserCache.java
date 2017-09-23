@@ -2,6 +2,7 @@ package com.thoughtworks.star.util;
 
 import com.thoughtworks.star.entity.User;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,16 +16,26 @@ public class UserCache {
         ID_USERS.put(user.getId(), user);
     }
 
-    public static User findById(String id) {
+    public User findById(String id) {
         return ID_USERS.get(id);
     }
 
-    public static User findByName(String username) {
+    public User findByName(String username) {
         return NAME_USERS.get(username);
     }
 
-    public static void save(User user) {
+    public User save(User user) {
         NAME_USERS.put(user.getUsername(), user);
         ID_USERS.put(user.getId(), user);
+        return user;
+    }
+
+    public void clear(){
+        NAME_USERS.clear();
+        ID_USERS.clear();
+    }
+
+    public Collection<User> findAll() {
+        return ID_USERS.values();
     }
 }
