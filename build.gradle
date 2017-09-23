@@ -30,6 +30,7 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compileOnly ('org.projectlombok:lombok:1.16.18')
 
     testCompile('org.junit.jupiter:junit-jupiter-api:5.0.0')
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.0.0')
