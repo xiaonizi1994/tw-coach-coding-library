@@ -16,4 +16,5 @@ class GreetingControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value("Hello world."));
     }
+
 }
