@@ -8,15 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserControllerTest extends BaseControllerTest {
 
     /**
-     * 1. 创建一个用户
+     * 创建一个用户
      */
     @Test
     void should_create_user() throws Exception {
@@ -32,7 +31,7 @@ class UserControllerTest extends BaseControllerTest {
     }
 
     /**
-     * 2. 查询用户列表
+     * 查询用户列表
      */
     @Test
     void should_list_users() throws Exception {
@@ -48,6 +47,27 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(jsonPath("$[0].username").value("admin"))
                 .andExpect(jsonPath("$[0].password").value("123"))
                 .andExpect(jsonPath("$[0].age").value(25));
+    }
+
+    /**
+     * 更新用户年龄
+     */
+    @Test
+    void should_update_user() throws Exception {
+        User user = User.builder().id(StringUtils.randomUUID()).username("admin").password("123").age(25).build();
+        UserCache userCache = new UserCache();
+        userCache.clear();
+        userCache.save(user);
+
+        User updatedUser = User.builder().id(user.getId()).username("admin1").password("321").age(29).build();
+        mockMvc.perform(put("/api/users/" + user.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(updatedUser)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.username").value("admin1"))
+                .andExpect(jsonPath("$.password").value("321"))
+                .andExpect(jsonPath("$.age").value(29));
     }
 
 }

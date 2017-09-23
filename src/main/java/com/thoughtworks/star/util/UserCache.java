@@ -38,4 +38,10 @@ public class UserCache {
     public Collection<User> findAll() {
         return ID_USERS.values();
     }
+
+    public User update(User user) {
+        ID_USERS.put(user.getId(),user);
+        NAME_USERS.put(user.getUsername(),user);
+        return user;
+    }
 }
