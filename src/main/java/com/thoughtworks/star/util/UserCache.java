@@ -5,6 +5,7 @@ import com.thoughtworks.star.entity.User;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserCache {
     private static final Map<String, User> NAME_USERS = new HashMap<>();
@@ -30,7 +31,7 @@ public class UserCache {
         return user;
     }
 
-    public void clear(){
+    public void clear() {
         NAME_USERS.clear();
         ID_USERS.clear();
     }
@@ -40,8 +41,12 @@ public class UserCache {
     }
 
     public User update(User user) {
-        ID_USERS.put(user.getId(),user);
-        NAME_USERS.put(user.getUsername(),user);
+        ID_USERS.put(user.getId(), user);
+        NAME_USERS.put(user.getUsername(), user);
         return user;
+    }
+
+    public Collection<User> findByAge(int age) {
+        return ID_USERS.values().stream().filter(user -> age == user.getAge()).collect(Collectors.toList());
     }
 }

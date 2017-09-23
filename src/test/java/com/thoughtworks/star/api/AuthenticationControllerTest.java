@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthenticationControllerTest extends BaseControllerTest {
 
     /**
-     * 1. 完成成功登陆API
+     * 2.1 完成成功登陆API
      */
     @Test
     void should_login_successfully() throws Exception {
@@ -29,7 +29,7 @@ class AuthenticationControllerTest extends BaseControllerTest {
     }
 
     /**
-     * 2. 完成登陆失败API
+     * 2.2 完成登陆失败API
      */
     @Test
     void should_login_failed_when_login_with_bad_credential() throws Exception {

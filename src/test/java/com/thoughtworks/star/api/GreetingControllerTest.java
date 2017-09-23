@@ -9,6 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class GreetingControllerTest extends BaseControllerTest {
 
+    /**
+     * 1. Greeting api
+     *
+     */
     @Test
     void should_return_greeting() throws Exception {
         mockMvc.perform(get("/api/greeting")

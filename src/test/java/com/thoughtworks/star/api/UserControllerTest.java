@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerTest extends BaseControllerTest {
 
     /**
-     * 创建一个用户
+     * 3. 创建一个用户
      */
     @Test
     void should_create_user() throws Exception {
@@ -31,7 +31,7 @@ class UserControllerTest extends BaseControllerTest {
     }
 
     /**
-     * 查询用户列表
+     * 4. 查询用户列表
      */
     @Test
     void should_list_users() throws Exception {
@@ -50,7 +50,7 @@ class UserControllerTest extends BaseControllerTest {
     }
 
     /**
-     * 更新用户年龄
+     * 5. 更新用户年龄
      */
     @Test
     void should_update_user() throws Exception {
@@ -69,5 +69,24 @@ class UserControllerTest extends BaseControllerTest {
                 .andExpect(jsonPath("$.password").value("321"))
                 .andExpect(jsonPath("$.age").value(29));
     }
+
+    /**
+     * 6. 查询年龄为22岁的用户
+     */
+    @Test
+    void should_list_user_with_age_22() throws Exception {
+        UserCache userCache = new UserCache();
+        userCache.clear();
+        userCache.save(User.builder().id(StringUtils.randomUUID()).username("admin").password("123").age(22).build());
+        userCache.save(User.builder().id(StringUtils.randomUUID()).username("admin1").password("123").age(22).build());
+        userCache.save(User.builder().id(StringUtils.randomUUID()).username("admin2").password("123").age(25).build());
+
+        mockMvc.perform(get("/api/users")
+                .param("age", "22")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
+    }
+
 
 }

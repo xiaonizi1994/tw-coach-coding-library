@@ -29,10 +29,16 @@ public class UserController {
         return userCache.findAll();
     }
 
+    @GetMapping(params = "age")
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<User> listByAge(int age) {
+        return userCache.findByAge(age);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public User update(@PathVariable String id, @RequestBody User user) {
-        if (userCache.findById(id) == null){
+        if (userCache.findById(id) == null) {
             throw new UserNotFoundException();
         }
         return userCache.update(user);
